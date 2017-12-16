@@ -56,12 +56,13 @@ annual = dataf %>%
     group_by(year, field, level) %>%
     summarize(total_awarded = sum(total_awarded, na.rm = TRUE)) %>%
     spread(level, total_awarded) %>%
-    ungroup() %>%
-    mutate(PhD.lag5 = lag(PhD, n = 5), 
-           PhD.lag10 = lag(PhD, n = 10), 
+    group_by(field) %>%
+    mutate(PhD.lead5 = lead(PhD, n = 5), 
+           PhD.lead10 = lead(PhD, n = 10), 
            ratio = bachelor / PhD,
-           ratio.5 = bachelor / PhD.lag5, 
-           ratio.10 = bachelor / PhD.lag10)
+           ratio.5 = bachelor / PhD.lead5, 
+           ratio.10 = bachelor / PhD.lead10) %>%
+    ungroup()
 
 ## Normalize ratio to first ten years
 annual = annual %>%
