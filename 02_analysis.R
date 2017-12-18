@@ -1,3 +1,9 @@
+#' ---
+#' output:
+#'     html_document: 
+#'         self_contained: no
+#' ---
+#' 
 #' # The Underproduction of Philosophy PhDs #
 #' 
 #' One common explanation for [the contiuing structural employment problem for philosophy PhDs](http://dailynous.com/2017/10/02/philosophy-phd-program-rankings-apdas-2017-final-report/) is that there are ["too many" philosophy PhDs](http://dailynous.com/2015/12/04/are-there-too-many-philosophy-phds-its-complicated/). That is, according to this explanation, the supply of philosophy PhDs (i.e., the number of new PhDs) is greater than the demand (specifically, the need for people with PhDs in philosophy to teach philosophy classes).  One way to empirically check this explanation is to look at the tenure-track employment rate — what fraction of recent philosophy PhDs are employed as tenure-track faculty?  Insofar as this rate has gone down and remains low, this suggests that the field has been overproducing PhDs. 
