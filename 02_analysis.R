@@ -1,7 +1,7 @@
 #' ---
 #' output:
 #'     html_document: 
-#'         self_contained: no
+#'         self_contained: yes
 #' ---
 #' 
 #' # The Underproduction of Philosophy PhDs #
@@ -24,6 +24,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 library(tidyverse)
 library(cowplot)
+library(plotly)
 
 load('01-ipeds_1984_2016.Rdata')
 
@@ -81,20 +82,23 @@ annual = annual %>%
 
 #' The first plot below shows the total number of bachelors degrees, by field and year.  The plot shows a dramatic rise in biology; a sharp drop-off in physical science in the 1980s, followed by a gradual increase; and more-or-less stable numbers across the other fields.  
 ## Bachelors
-ggplot(annual, aes(year, bachelor, color = field)) + 
+{ggplot(annual, aes(year, bachelor, color = field)) + 
     geom_line() + 
-    scale_color_brewer(palette = 'Set1')
+    scale_color_brewer(palette = 'Set1')} %>%
+    ggplotly()
 #'
 #' Next we plot total PhDs. Again, there is a dramatic rise in biology, and smaller increasing trends for most other fields. Physical science is much more prominent in this plot than in the bachelors plot. 
 ## PhDs
-ggplot(annual, aes(year, PhD, color = field)) + 
+{ggplot(annual, aes(year, PhD, color = field)) + 
     geom_line() + 
-    scale_color_brewer(palette = 'Set1')
+    scale_color_brewer(palette = 'Set1')} %>%
+    ggplotly()
 #'
 #' Now we move on to the ratio of new bachelors degrees to new PhDs. Again, we are using bachelors degrees as a proxy for the total demand for philosophy teachers. Comparing this ratio for recent years (the right-hand side) to 25+ years ago (the left-hand side) gives us an indication of whether these fields have been overproducing or underproducing PhDs.  If the ratio is **lower** today than 30 years ago, this suggests that supply (PhDs) has increased relative to demand (bachelors), and so the field has been **overproducing** PhDs.  But if the ratio is **higher** today than 30 years ago, this suggests that demand has increased relative to supply, and so the field has been **underproducing** PhDs.  
-ggplot(annual, aes(year, color = field)) +
+{ggplot(annual, aes(year, color = field)) +
     geom_line(aes(y = ratio)) + 
-    scale_color_brewer(palette = 'Set1')
+    scale_color_brewer(palette = 'Set1')} %>%
+    ggplotly()
 #' 
 #' Working from top to bottom, the long-term trends for sociology and (to a lesser extent) English is an increasing ratio.  This suggests that these fields have been **underproducing** PhDs.  This story is somewhat more complicated for English, which shows large peaks and troughs.  
 #' 
@@ -105,10 +109,11 @@ ggplot(annual, aes(year, color = field)) +
 #' Finally, the ratio for biology has been nearly flat.  While the number of PhDs in biology increased dramatically over the last 20 years, so did the number of bachelors degrees.  
 #' 
 #' Because the ratios for different disciplines are on different scales, it may be easier to interpret a normalized ratio.  In the following plot, for each field, we first calculate the mean ratio over the first ten years of the data (1984-1994), then divide the ratio in a given year by this mean.  
-ggplot(annual, aes(year, ratio.norm, color = field)) + 
+{ggplot(annual, aes(year, ratio.norm, color = field)) + 
     geom_line() + 
     geom_hline(yintercept = 1, linetype = 'dashed') +
-    scale_color_brewer(palette = 'Set1')
+    scale_color_brewer(palette = 'Set1')} %>%
+    ggplotly()
 #' 
 #' As with the previous graph, if this normalized ratio is **high** — above the dashed line at 1.0 — that suggests that the field has **underproduced** PhDs.  This appears to be the case for sociology, philosophy, English, and biology; although philosophy has increased only slightly relative to the 1984-1994 baseline, and English has recently dropped just below this baseline.  There appears to be chronic overproduction in physical science, math, and electrical engineering.  
 #' 
