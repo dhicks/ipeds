@@ -68,10 +68,13 @@ dataf_wide = dataf %>%
               hispanic = ifelse(!is.na(CHISPT), CHISPT, 
                                 CRACE09 + CRACE10), 
               white = ifelse(!is.na(CWHITT), CWHITT, 
-                             CRACE11 + CRACE12)) %>% 
+                             CRACE11 + CRACE12), 
+              unknown = ifelse(!is.na(CUNKNT), CUNKNT, 
+                               CRACE13 + CRACE14), 
+              two_or_more = C2MORT) %>% 
     group_by(year) %>% 
     summarize_if(is.numeric, sum, na.rm = TRUE) %>% 
-    mutate_at(vars(black:white), 
+    mutate_at(vars(black:two_or_more), 
               list(share = ~ . /total)) %>% 
     ## The 0s for PI are actually NAs, from the period before 
     ## PI was reported separately from Asian
@@ -97,4 +100,17 @@ dataf_long %>%
             subtitle = Sys.time())
 
 ggsave('04_re_share.png', 
+       height = 4, width = 6, scale = 1.5)
+
+dataf_long %>% 
+    mutate(group = str_remove(group, '_share')) %>% 
+    filter(group %in% c('hispanic', 'unknown')) %>% 
+    ggplot(aes(year, share, fill = group)) +
+    geom_area(position = 'stack') +
+    scale_fill_viridis_d(option = 'C') +
+    scale_y_continuous(labels = scales::percent_format()) +
+    theme_minimal() +
+    ggtitle("Bachelor's degrees in Philosophy, Hispanic vs. Unknown race-ethnicity", 
+            subtitle = Sys.time())
+ggsave('04_hisp_na.png', 
        height = 4, width = 6, scale = 1.5)
