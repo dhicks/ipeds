@@ -26,7 +26,7 @@ library(tidyverse)
 library(cowplot)
 library(plotly)
 
-load('01-ipeds_1984_2016.Rdata')
+load('../data/01-ipeds_1984_2016.Rdata')
 
 cip_codes = tribble(
     ~cip, ~field, ~regex,
@@ -118,3 +118,32 @@ annual = annual %>%
 #' As with the previous graph, if this normalized ratio is **high** — above the dashed line at 1.0 — that suggests that the field has **underproduced** PhDs.  This appears to be the case for sociology, philosophy, English, and biology; although philosophy has increased only slightly relative to the 1984-1994 baseline, and English has recently dropped just below this baseline.  There appears to be chronic overproduction in physical science, math, and electrical engineering.  
 #' 
 #' So, against the common explanation for the structural unemployment problem, this analysis suggests that philosophy (along with English, biology, and sociology) has produced **too few** PhDs, rather than too many.  This suggests, I think, that the right way to address the structural unemployment problem is to focus on de-adjunctification — that is, pushing colleges and universities to turn short-term, part-time teaching contracts into long-term, full-time teaching positions, and to turn long-term, full-time teaching positions into tenure-track faculty positions.  This push is likely to be most effective by organizing strong faculty, adjunct, and graduate student unions.  But that is a topic for another post.  
+#' 
+#' ## Common Objections and Misinterpretations ##
+#' 
+#' *Not everyone who enrolls in a philosophy class goes on to major.*
+#' 
+#' Of course.  My suggestion is that the number of majors gives us an indirect way to measure total course enrollments.  Mathematically, my suggestion is based on the fact that
+#' \( \frac{total enrollment}{\# PhDs} = \frac{\# bachelors}{\# PhDs} \times \frac{total enrollment}{\# bachelors}.)
+#' The left-hand side is the ratio we really want.  The first term on the right-hand side is the ratio we can calculate with the available data.  If the second term is constant, then the term we can calculate is always proportional to the term we really want.  Then changes in the term that we can calculate (increasing or decreasing) correspond to changes in the term that we really want.  The assumption that the last term is constant is one important limitation of my analysis.  
+#' 
+#' *Faculty are teaching more courses and larger courses.*
+#' 
+#' Larger classes and heavier course loads are one way to respond to increased demand for philosophy teaching without increasing the number of philosophy teachers. In terms of the bachelors:PhD ratio, this would mean that the “correct” ratio would be higher. In economics jargon, this would be called increasing “worker productivity,” and it does look more economically efficient. So yes, this is one possibility that my post doesn’t explicitly take into account. I assume that “worker productivity” of philosophy teachers has remained constant. In addition, increasing "productivity" probably also has a number of disadvantages, including decreasing the quality of education, taking time away from research and administration, and harming faculty mental health and general well-being.  Data can be used to examine these negative impacts empirically.  
+#' 
+#' *This means grad students and grad programs don't have to worry about employment. That's ethically irresponsible.*
+#' 
+#' The central claim of my analysis is that structural underemployment isn't due to producing too many PhDs.  This doesn't imply that structural underemployment isn't a problem; indeed, it assumes the existence of the problem.  This is like saying "your heart disease isn't caused by high cholesterol."  Ruling out one cause doesn't imply that you don't have heart disease.  Because of the way the demand for philosophy teachers is satisfied — by adjunctification and increasing course loads — competition for long-term positions with reasonable workloads remains extremely tight.  Grad students and grad programs need to be aware of this, and ensure that students are prepared to compete effectively and find other careers.  I would further argue that grad students and grad programs should work for de-adjunctification.  
+#' 
+#' *STEM fields, including biology, physical science, and electrical engineering, have better non-academic career prospects than philosophy.*
+#' 
+#' Non-academic career prospects and preparation differ substantially between STEM fields.  While it's common for chemistry PhDs to go into industry, this is less common with physics and biology PhDs.  In [a survey of biology, chemistry, and physics graduate students](http://journals.plos.org/plosone/article/figure?id=10.1371/journal.pone.0036307.g004), about half of chemistry students reported being "encouraged" or "strongly encouraged" to pursue a career in industry; only about 30% of biology and physics grad students were similarly encouraged to pursue industry careers.  At least in biology, [faculty career prospects are comparable to philosophy](http://www.nature.com/news/2011/110420/full/472276a.html), with about one-third of biology PhDs in tenured or tenure-track positions six years after graduation. 
+#' 
+#' *Your analysis uses too many assumptions.*
+#' 
+#' A basic lesson from philosophy of science is that substantive assumptions are needed for any data analysis.  This applies as well to the analyses done by your school's Institutional Research office that are used to argue against faculty hiring or for shrinking programs.  In this post, I've tried to make my assumptions explicit, and made my analysis code available for review.  
+#' 
+#' *De-adjunctification is impossible. (or) You need a solid plan for de-adjunctification.*
+#' 
+#' The lack of a treatment for the disease, given the diagnosis, doesn't necessarily invalidate the diagnosis.  Part of the goal of my post was to direct our attention away from worrying about whether we should produce fewer PhDs (and who should produce fewer, and the perverse incentives for any given program to produce more PhDs, and so on), and instead direct our attention more towards academic politics.  More fundamentally, if my analysis is right, then we should be working simultaneously to organize and push for reasonable de-adjunctifying reforms.  Even if departments aren't in a position to convert adjunct positions into tenure-track positions, they may be in a position to convert term-by-term part-time contracts into annual or multiyear full-time contracts.  Organization — such as adjunct unions — is important for building power over the long term, in order to push for more radical changes, such as reducing class sizes and teaching loads and hiring more full-time teaching faculty (if not tenure-track faculty).  These two steps aren't a fully-developed plan for de-adjunctification.  But they do move in that direction.  
+#' 

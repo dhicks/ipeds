@@ -11,7 +11,7 @@ base_filenames = c(
 urls = paste0('https://nces.ed.gov/ipeds/datacenter/data/', 
               base_filenames, '.zip')
 
-data_folder = 'data'
+data_folder = '../data'
 download_filenames = paste0(data_folder, '/', 
                             base_filenames, '.zip')
 download.file(urls, download_filenames)
@@ -57,4 +57,4 @@ ipeds_1984_2016 = dplyr::select(ipeds_1984_2016,
                                 year, unitid, cipcode, awlevel, 
                                 total_w, total_m)
 
-save(ipeds_1984_2016, file = '01-ipeds_1984_2016.Rdata')
+save(ipeds_1984_2016, file = paste0(data_folder, '01-ipeds_1984_2016.Rdata'))
